@@ -46,7 +46,7 @@ def load_params(url: str) -> dict:
 
 def load_feature(datapath: str) -> pd.DataFrame:
     try:
-        train_data = pd.read_csv(os.path.join(datapath, 'train_bow.csv'))
+        train_data = pd.read_csv(os.path.join(datapath, 'train_tfidf.csv'))
         logger.debug('Feature Engineered data load successful')
         return train_data
     except FileNotFoundError as e:

@@ -4,7 +4,7 @@ import os
 import yaml
 import logging
 
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 logger = logging.getLogger('Feature Engineering')
 logger.setLevel('DEBUG')
@@ -65,7 +65,7 @@ def load_data(data_path: str) -> tuple:
 
 def apply_count_vectorizer(train_df: pd.DataFrame, test_df: pd.DataFrame, max_feature: int) -> tuple:
     try:
-        vectorizer = CountVectorizer(max_features=max_feature)
+        vectorizer = TfidfVectorizer(max_features=max_feature)
         X_train = train_df['content'].values
         Y_train = train_df['sentiment'].values
 
@@ -93,8 +93,8 @@ def save_FE_data(train: pd.DataFrame, test: pd.DataFrame, data_path: str) -> Non
     try:
         data_path = os.path.join(data_path, 'processed')
         os.makedirs(data_path, exist_ok=True)
-        train.to_csv(os.path.join(data_path, 'train_bow.csv'), index=False)
-        test.to_csv(os.path.join(data_path, 'test_bow.csv'), index=False)
+        train.to_csv(os.path.join(data_path, 'train_tfidf.csv'), index=False)
+        test.to_csv(os.path.join(data_path, 'test_tfidf.csv'), index=False)
         logger.debug('Feature engineered data exported to csv')
     except IOError as e:
         logger.error(f"Error: An I/O error occurred while saving feature engineering data: {e}")

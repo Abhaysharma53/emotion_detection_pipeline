@@ -40,7 +40,7 @@ def load_model(url: str):
 
 def load_data(datapath: str) -> pd.DataFrame:
     try:
-        test_data = pd.read_csv(os.path.join(datapath, 'test_bow.csv'))
+        test_data = pd.read_csv(os.path.join(datapath, 'test_tfidf.csv'))
         return test_data
     except FileNotFoundError as e:
         logger.error(f"Error: File not found in path {datapath}. Details: {e}")
